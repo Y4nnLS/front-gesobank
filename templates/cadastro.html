@@ -36,7 +36,7 @@
             <span class="input-span">
                 <label for="confirm_senha" class="label">Confirme sua senha</label>
                 <input type="confirm_senha" name="confirm_senha" id="confirm_senha"></span>
-
+                <div class="error-message" id="error-message"></div>
 
             <input class="submit" type="submit" value="Log in">
 
@@ -44,19 +44,47 @@
         <div class="response-container">
             <p id="responseMessage"></p>
         </div>
-
         <script>
+            document.getElementById('confirm_senha').addEventListener('input', function(event) {
+                var password = document.getElementById('senha').value;
+                var confirmPassword = this.value;
+                var errorMessage = document.getElementById('error-message');
+
+                if (password !== confirmPassword && confirmPassword !== '') {
+                    errorMessage.innerText = 'As senhas não coincidem!';
+                    errorMessage.style.color = 'red';
+                    this.classList.add('error');
+                } else {
+                    errorMessage.innerText = '';
+                    errorMessage.style.color = 'transparent';
+                    this.classList.remove('error');
+                }
+            });
+
             document.getElementById("myForm").addEventListener("submit", function (e) {
                 e.preventDefault();
                 
+                var password = document.getElementById('senha').value;
+                var confirmPassword = document.getElementById('confirm_senha').value;
+                var errorMessage = document.getElementById('error-message');
+
+                if (password !== confirmPassword || confirmPassword === '') {
+                    errorMessage.innerText = 'As senhas não coincidem!';
+                    errorMessage.style.color = 'red';
+                    return; // Não envia o formulário se as senhas não coincidirem
+                } else {
+                    errorMessage.innerText = '';
+                    errorMessage.style.color = 'transparent';
+                }
+
                 const formData = new FormData(this);
-    
+
                 // Converte os dados do formulário para um objeto JSON
                 const jsonData = {};
                 formData.forEach((value, key) => {
                     jsonData[key] = value;
                 });
-    
+
                 // Envia os dados para a API REST
                 fetch('/cadastro', {
                     method: 'POST',
@@ -65,7 +93,12 @@
                     },
                     body: JSON.stringify(jsonData)
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('As senhas não coincidem!');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     document.getElementById("responseMessage").textContent = "Resposta da API: " + JSON.stringify(data);
                 })
