@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>GESOBANK</h1>
+            <label class="switch" id="switch">
+                <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g fill="#ffd43b">
+                            <circle r="5" cy="12" cx="12"></circle>
+                            <path
+                                d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+                            </path>
+                        </g>
+                    </svg></span>
+                <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                        <path
+                            d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+                        </path>
+                    </svg></span>
+                <input type="checkbox" class="input">
+                <span class="slider"></span>
+            </label>
+        </nav>
+        <!-- <script src="assets/js/switch.js"></script> -->
+    </header>
+    <main>
+        <form class="form" id="myForm">
+            <span class="input-span">
+                <label for="nome_completo" class="label">Nome de Completo</label>
+                <input type="nome_completo" name="nome_completo" id="nome_completo"></span>
+            <span class="input-span">
+                <label for="nome" class="label">Nome de usuario</label>
+                <input type="nome" name="nome" id="nome"></span>
+            <span class="input-span">
+                <label for="telefone" class="label">telefone</label>
+                <input type="telefone" name="telefone" id="telefone"></span>
+
+            <span class="input-span">
+                <label for="cpf" class="label">cpf</label>
+                <input type="cpf" name="cpf" id="cpf"></span>
+
+            <span class="input-span">
+                <label for="senha" class="label">senha</label>
+                <input type="senha" name="senha" id="senha"></span>
+            <span class="input-span">
+                <label for="confirm_senha" class="label">Confirme sua senha</label>
+                <input type="confirm_senha" name="confirm_senha" id="confirm_senha"></span>
+
+
+            <input class="submit" type="submit" value="Log in">
+
+        </form>
+        <div class="response-container">
+            <h3>Resposta da API</h3>
+            <p id="responseMessage"></p>
+        </div>
+
+        <script>
+            document.getElementById("myForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+    
+                // Converte os dados do formulário para um objeto JSON
+                const jsonData = {};
+                formData.forEach((value, key) => {
+                    jsonData[key] = value;
+                });
+    
+                // Envia os dados para a API REST
+                fetch('/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("responseMessage").textContent = "Resposta da API: " + JSON.stringify(data);
+                })
+                .catch(error => {
+                    document.getElementById("responseMessage").textContent = "Erro: " + error.message;
+                });
+            });
+        </script>
+    </main>
+</body>
+
+</html>
