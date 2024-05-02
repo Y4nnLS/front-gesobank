@@ -50,6 +50,9 @@ table {
     --clr: #58BC82;
     --clr-alpha: #9c9c9c60;
 }
+body{
+    background-color: #212121;
+}
 /* main inicio */
 main{
     margin-top: 5vh;
@@ -127,7 +130,7 @@ form .submit:hover {
 /* header inicio*/
 
 header {
-    background-color: var(--bg-dark);
+    background-color: var(--clr);
     width: 100%;
     top: 0;
     left: 0;
