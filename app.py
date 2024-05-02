@@ -7,13 +7,24 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
+# @app.route('/')
+# def index():
+#     return render_template('login.html')
+@app.route('/', methods=['POST', 'GET'])
+@app.route('/login',methods=['POST', 'GET'])
+def login():
+    if(request.method == 'POST'):
+        features = request.json
+        X = []
+        senha = str(features['senha'])
+        nome = str(features['nome'])
+        userHash = hash_usersenha(nome, senha)
+        passwordHash = hash_sla(nome)
+        X.append(userHash)
+        X.append(passwordHash)
+        return jsonify(X)
     return render_template('login.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 @app.route('/cadastro', methods=['POST', 'GET'])
 def cadastro():

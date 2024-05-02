@@ -16,17 +16,50 @@
             <h1>GESOBANK</h1>
     </header>
     <main>
-        <form class="form">
+        <form class="form" id="myForm">
             <span class="input-span">
-                <label for="email" class="label">Email</label>
-                <input type="email" name="email" id="email"></span>
+                <label for="nome" class="label">Nome de usuário</label>
+                <input type="nome" name="nome" id="nome"></span>
             <span class="input-span">
-                <label for="password" class="label">Password</label>
-                <input type="password" name="password" id="password"></span>
+                <label for="senha" class="label">senha</label>
+                <input type="senha" name="senha" id="senha"></span>
             <span class="span"><a href="#">Forgot password?</a></span>
             <input class="submit" type="submit" value="Log in">
             <span class="span">Don't have an account? <a href="/cadastro">Sign up</a></span>
         </form>
+        <div class="response-container">
+            <p id="responseMessage"></p>
+        </div>
+
+        <script>
+            document.getElementById("myForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+    
+                // Converte os dados do formulário para um objeto JSON
+                const jsonData = {};
+                formData.forEach((value, key) => {
+                    jsonData[key] = value;
+                });
+    
+                // Envia os dados para a API REST
+                fetch('/cadastro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("responseMessage").textContent = "Resposta da API: " + JSON.stringify(data);
+                })
+                .catch(error => {
+                    document.getElementById("responseMessage").textContent = "Erro: " + error.message;
+                });
+            });
+        </script>
     </main>
 </body>
 
