@@ -73,8 +73,8 @@ form {
     gap: .5rem;
 }
 
-form input[type="email"],
-form input[type="password"] {
+form input[type="nome"],
+form input[type="senha"] {
     border-radius: 0.5rem;
     padding: 1rem 0.75rem;
     /* width: 100%; */
@@ -86,8 +86,8 @@ form input[type="password"] {
     outline: 2px solid var(--bg-dark);
 }
 
-form input[type="email"]:focus,
-form input[type="password"]:focus {
+form input[type="nome"]:focus,
+form input[type="senha"]:focus {
     outline: 2px solid var(--clr);
 }
 

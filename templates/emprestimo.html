@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='emprestimo.css') }}">
+    <title>Empréstimo</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+            <h1>GESOBANK</h1>
+    </header>
+    <main>
+        <div class="card-conteiner">
+            <div class="card-content">
+                <div class="card-title">Valor <span>do Empréstimo</span></div>
+                <div class="values">
+                    <!-- Substitua o span por um input -->
+                    <div>R$<input type="number" id="first" value="0" min="1" max="10000"></div>
+                </div>
+                <div data-range="#third" data-value-1="#second" data-value-0="#first" class="slider" id="myRange">
+                    <label class="label-min-value">1</label>
+                    <label class="label-max-value">10 000</label>
+                </div>
+                <div class="slidecontainer">
+                    <input class="max input-ranges" name="range_1" type="range" min="1" max="10000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)">
+                </div>
+            </div>
+        </div>
+        <script>
+            var slider = document.querySelector(".input-ranges");
+            var output = document.getElementById("first");
+    
+            function rangeSlide(value){
+                // Atualiza o valor do input
+                output.value = value;
+                // Atualiza o valor do range
+                slider.value = value;
+            }
+    
+            // Adiciona um evento de escuta ao input para capturar a entrada do usuário
+            output.addEventListener("input", function() {
+                var valor = parseFloat(this.value); // Obtém o valor digitado como número
+                // Verifica se o valor está dentro do intervalo permitido
+                if (valor < 1) {
+                    this.value = 1; // Define o valor mínimo permitido
+                } else if (valor > 10000) {
+                    this.value = 10000; // Define o valor máximo permitido
+                } else {
+                    this.value = valor; // Mantém o valor dentro do intervalo permitido
+                }
+                rangeSlide(this.value); // Atualiza o valor do range e da interface
+            });
+    
+            // Adiciona um evento de escuta ao range para atualizar o valor do input
+            slider.addEventListener("input", function() {
+                output.value = this.value;
+            });
+    
+            // Adiciona um evento de escuta ao range para atualizar o valor do input
+            slider.addEventListener("change", function() {
+                output.value = this.value;
+            });
+        </script>
+    </main>
+    
+    
+    
+    
+    
+    <footer>
+
+    </footer>
+</body>
+
+</html>

@@ -43,7 +43,9 @@ def cadastro():
         return jsonify(X)
     return render_template('cadastro.html')
 
-
+@app.route('/emprestimo', methods=['POST', 'GET'])
+def emprestimo():
+    return render_template('emprestimo.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
