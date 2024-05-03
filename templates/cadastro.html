@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <script src="https://kit.fontawesome.com/d39b623768.js" crossorigin="anonymous"></script>
+
     <title>Cadastro</title>
 </head>
 
@@ -18,24 +20,30 @@
         <form class="form" id="myForm">
             <span class="input-span">
                 <label for="nome_completo" class="label">Nome de Completo</label>
-                <input type="nome_completo" name="nome_completo" id="nome_completo"></span>
+                <input type="nome_completo" name="nome_completo" id="nome_completo" class="input-field"></span>
             <span class="input-span">
                 <label for="nome" class="label">Nome de usuario</label>
-                <input type="nome" name="nome" id="nome"></span>
+                <input type="nome" name="nome" id="nome" class="input-field"></span>
             <span class="input-span">
                 <label for="telefone" class="label">telefone</label>
-                <input type="telefone" name="telefone" id="telefone"></span>
+                <input type="telefone" name="telefone" id="telefone" class="input-field"></span>
 
             <span class="input-span">
                 <label for="cpf" class="label">cpf</label>
-                <input type="cpf" name="cpf" id="cpf"></span>
+                <input type="cpf" name="cpf" id="cpf" class="input-field"></span>
 
             <span class="input-span">
                 <label for="senha" class="label">senha</label>
-                <input type="senha" name="senha" id="senha"></span>
+                <div class="password-input">
+                    <input type="password" name="senha" id="senha" class="input-field">
+                    <i class="fa-regular fa-eye Eyecon"></i>
+                </div></span>
             <span class="input-span">
                 <label for="confirm_senha" class="label">Confirme sua senha</label>
-                <input type="confirm_senha" name="confirm_senha" id="confirm_senha"></span>
+                <div class="password-input">
+                    <input type="password" name="confirm_senha" id="confirm_senha" class="input-field">
+                    <i class="fa-regular fa-eye Eyecon2"></i>
+                </div></span>
                 <div class="error-message" id="error-message"></div>
 
             <input class="submit" type="submit" value="Log in">
@@ -106,6 +114,30 @@
                     document.getElementById("responseMessage").textContent = "Erro: " + error.message;
                 });
             });
+            const Eyecon = document.querySelectorAll('.Eyecon');
+            const x = document.querySelectorAll('#senha')
+            for(let i = 0; i< Eyecon.length;i++){
+                Eyecon[i].addEventListener('click', ()=>{
+                    if (x[i].type ==='password') {
+                        x[i].type='text'
+                    }
+                    else{
+                        x[i].type='password'
+                    }
+                })
+            }
+            const Eyecon2 = document.querySelectorAll('.Eyecon2');
+            const x2 = document.querySelectorAll('#confirm_senha')
+            for(let i = 0; i< Eyecon2.length;i++){
+                Eyecon2[i].addEventListener('click', ()=>{
+                    if (x2[i].type ==='password') {
+                        x2[i].type='text'
+                    }
+                    else{
+                        x2[i].type='password'
+                    }
+                })
+            }
         </script>
     </main>
 </body>

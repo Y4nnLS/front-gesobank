@@ -74,7 +74,8 @@ form {
 }
 
 form input[type="nome"],
-form input[type="senha"] {
+form input[type="text"],
+form input[type="password"] {
     border-radius: 0.5rem;
     padding: 1rem 0.75rem;
     /* width: 100%; */
@@ -87,11 +88,13 @@ form input[type="senha"] {
 }
 
 form input[type="nome"]:focus,
-form input[type="senha"]:focus {
+form input[type="text"]:focus,
+form input[type="password"]:focus {
     outline: 2px solid var(--clr);
 }
 
 .label {
+    position: relative;
     align-self: flex-start;
     color: var(--clr);
     font-weight: 600;
@@ -120,6 +123,7 @@ form .submit:hover {
 .span {
     text-decoration: none;
     color: var(--bg-dark);
+    text-align: center;
 }
 
 .span a {
@@ -147,3 +151,24 @@ nav {
 }
 
 /* header fim */
+.password-input {
+    position: relative;
+    width: 100%;
+}
+
+.password-input input {
+    padding-right: 30px; /* Ajuste conforme necessário para deixar espaço para o ícone */
+}
+
+.password-input .fa-eye {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Ajuste conforme necessário */
+    transform: translateY(-50%);
+    cursor: pointer; /* Adicione se desejar que o ícone seja clicável */
+}
+
+.input-field {
+    width: 100%; /* Subtrai o espaço para o ícone do total da largura */
+    padding-right: 40px; /* Ajuste conforme necessário para deixar espaço para o ícone */
+}
