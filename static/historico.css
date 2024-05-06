@@ -1,0 +1,140 @@
+/* historico.css */
+
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Global Variables */
+:root {
+    --bg-light: #f2f2f2;
+    --bg-dark: #444;
+    --clr: #58BC82;
+    --clr-alpha: #9c9c9c60;
+}
+
+body {
+    background-color: #212121;
+    font-family: Arial, sans-serif;
+    color: var(--bg-light);
+}
+
+/* Main Section */
+main {
+    margin-top: 5vh;
+}
+
+.historico-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Atividades */
+.atividades {
+    padding: 0;
+}
+
+.atividade {
+    background-color: var(--bg-dark);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tipo {
+    font-weight: bold;
+    color: var(--clr);
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-weight: bold;
+    color: var(--clr);
+    margin-bottom: 5px;
+}
+
+.data {
+    font-style: italic;
+    color: #888;
+}
+
+.info {
+    margin-bottom: 5px;
+}
+
+.info > div {
+    margin-bottom: 3px;
+}
+
+.valor {
+    float: right;
+    font-weight: bold;
+    color: var(--clr);
+}
+
+/* Header Section */
+header {
+    background-color: var(--clr);
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 16px;
+}

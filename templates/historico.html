@@ -1,0 +1,56 @@
+<!-- historico.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
+    <title>Histórico da Conta</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+            <img src="{{ url_for('static', filename='logo_gesobank.png') }}" alt="gesonel" style="height:10vh;width:25vh;">
+        </nav>
+    </header>
+    <main>
+        <div class="historico-container">
+            <h2>Histórico da Conta</h2>
+            <ul class="atividades">
+                <!-- Atividades -->
+                {% for atividade in historico %}
+                <li class="atividade">
+                    <div class="tipo">{{ atividade.tipo }}</div>
+                    <div class="data">{{ atividade.data }}</div>
+                    <div class="info">
+                        {% if atividade.de %}
+                        <div>De: {{ atividade.de }}</div>
+                        {% endif %}
+                        {% if atividade.para %}
+                        <div>Para: {{ atividade.para }}</div>
+                        {% endif %}
+                        {% if atividade.nome_cartao %}
+                        <div>Nome do Cartão: {{ atividade.nome_cartao }}</div>
+                        {% endif %}
+                        {% if atividade.numero_cartao %}
+                        <div>Número do Cartão: {{ atividade.numero_cartao }}</div>
+                        {% endif %}
+                        {% if atividade.valor_emprestado %}
+                        <div>Valor emprestado: R$ {{ atividade.valor_emprestado }}</div>
+                        {% endif %}
+                    </div>
+                    {% if atividade.tipo not in ['Cartão Salvo', 'Cartão Deletado'] %}
+                    <div class="valor">R$ {{ atividade.valor }}</div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

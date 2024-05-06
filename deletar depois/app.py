@@ -47,6 +47,7 @@ def cadastro():
 def emprestimo():
     return render_template('emprestimo.html')
 
+
 @app.route('/transferencia', methods=['POST', 'GET'])
 def transferencia():
     if request.method == 'POST':
@@ -84,7 +85,6 @@ historico_conta = [
 @app.route('/historico')
 def historico():
     return render_template('historico.html', historico=historico_conta)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

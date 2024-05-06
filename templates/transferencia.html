@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='transferencia.css') }}">
+    <title>Transferência</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+            <img src="{{ url_for('static', filename='logo_gesobank.png') }}" alt="gesonel" style="height:10vh;width:25vh;">
+        </nav>
+    </header>
+    <main>
+        <div class="card-conteiner">
+            <div class="card-content">
+                
+                <form class="form" id="myForm">
+                    <span class="input-span">
+                        <label for="valor" class="label">Valor da Transferência</label>
+                        <input type="text" name="valor" id="valor" class="input-field" placeholder="Valor a ser transferido">
+                    </span>
+                    <span class="input-span">
+                        <label for="CPF" class="label">CPF</label>
+                        <input type="text" name="CPF" id="CPF" class="input-field" placeholder="CPF">
+                    </span>
+                    <span class="input-span">
+                        <label for="destinatario" class="label">Destinatário</label>
+                        <input type="text" name="destinatario" id="destinatario" class="input-field" placeholder="Nome do destinatário">
+                    </span>
+                    <span class="input-span">
+                        <label for="telefone" class="label">Número de Telefone</label>
+                        <input type="tel" name="telefone" id="telefone" class="input-field" placeholder="Número de telefone do destinatário">
+                    </span>
+                    <input class="submit" type="submit" value="Transferir">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+
+</html>
