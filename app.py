@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template,redirect, url_for
-import hashlib
 from hash import hash_usersenha, hash_sla
 import requests
 
