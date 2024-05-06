@@ -2,14 +2,9 @@ from flask import Flask, request, jsonify, render_template,redirect, url_for
 import hashlib
 from hash import hash_usersenha, hash_sla
 import requests
-# resposta = requests.get('link da api')
-# print(resposta.status_code)
 
 app = Flask(__name__)
 
-# @app.route('/')
-# def index():
-#     return render_template('login.html')
 @app.route('/', methods=['POST', 'GET'])
 @app.route('/login',methods=['POST', 'GET'])
 def login():
@@ -54,8 +49,6 @@ def transferencia():
         data = request.form['data']
         destinatario = request.form['destinatario']
         telefone_destinatario = request.form['telefone_destinatario']
-
-        # Aqui você pode adicionar a lógica para processar a transferência
 
         return render_template('transferencia.html')
     else:
