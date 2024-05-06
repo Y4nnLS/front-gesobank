@@ -10,14 +10,15 @@ app = Flask(__name__)
 def login():
     if(request.method == 'POST'):
         features = request.json
-        X = []
         senha = str(features['senha'])
         nome = str(features['nome'])
-        userHash = hash_usersenha(nome, senha)
-        passwordHash = hash_sla(nome)
-        X.append(userHash)
-        X.append(passwordHash)
-        return jsonify(X)
+        userHash = hash_sla(nome)
+        passwordHash = hash_sla(senha)
+        url = 'http://localhost:5000/user/login'  # Substitua localhost:5000 pela URL correta do seu back-end
+        dados = {"userHash": userHash, "passwordHash": passwordHash}
+        response = requests.post(url, json=dados)
+        print(response.json())  # Exibindo a resposta do back-end
+        return jsonify(response)
     return render_template('login.html')
 
 
@@ -25,31 +26,52 @@ def login():
 def cadastro():
     if(request.method == 'POST'):
         features = request.json
-        X = []
         senha = str(features['senha'])
         nome = str(features['nome'])
-        userHash = hash_usersenha(nome, senha)
-        passwordHash = hash_sla(nome)
-        X.append(userHash)
-        X.append(passwordHash)
-        X.append(features['nome_completo'])
-        X.append(features['cpf'])
-        X.append(features['telefone'])
-        return jsonify(X)
+        name = str(features['nome_completo'])
+        cpf = str(features['cpf'])
+        phone = str(features['telefone'])
+        userHash = hash_sla(nome)
+        passwordHash = hash_sla(senha)
+        url = 'http://localhost:5000/user/register'  # Substitua localhost:5000 pela URL correta do seu back-end
+        dados = {"userHash": userHash, "passwordHash":passwordHash,"name": name,"cpf": cpf,"phone":phone}
+        response = requests.post(url, json=dados)
+        print(response.json())  # Exibindo a resposta do b
+        return jsonify(response)
     return render_template('cadastro.html')
 
 @app.route('/emprestimo', methods=['POST', 'GET'])
 def emprestimo():
+    if(request.method == 'POST'):
+        features = request.json
+        senha = str(features['senha'])
+        nome = str(features['nome'])
+        value = str(features['nome_completo'])
+        userHash = hash_sla(nome)
+        passwordHash = hash_sla(senha)
+        url = 'http://localhost:5000/user/register'  # Substitua localhost:5000 pela URL correta do seu back-end
+        dados = {"userHash": userHash, "passwordHash":passwordHash,"value": value}
+        response = requests.post(url, json=dados)
+        print(response.json())  # Exibindo a resposta do b
+        return jsonify(response)
     return render_template('emprestimo.html')
 
 @app.route('/transferencia', methods=['POST', 'GET'])
 def transferencia():
     if request.method == 'POST':
-        valor = request.form['valor']
-        data = request.form['data']
-        destinatario = request.form['destinatario']
-        telefone_destinatario = request.form['telefone_destinatario']
-
+        features = request.json
+        senha = str(features['senha'])
+        nome = str(features['nome'])
+        value = request.form['valor']
+        receiverName = request.form['destinatario']
+        receiverCpf = request.form['CPF']
+        receiverPhone = request.form['telefone']
+        userHash = hash_sla(nome)
+        passwordHash = hash_sla(senha)
+        url = 'http://localhost:5000/transference'  # Substitua localhost:5000 pela URL correta do seu back-end
+        dados = {"userHash": userHash, "passwordHash":passwordHash,"value": value,"receiverName": receiverName,"receiverCpf": receiverCpf,"receiverPhone": receiverPhone}
+        response = requests.post(url, json=dados)
+        print(response.json())  # Exibindo a resposta do b
         return render_template('transferencia.html')
     else:
         return render_template('transferencia.html')
