@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <script src="https://kit.fontawesome.com/d39b623768.js" crossorigin="anonymous"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+        <img src="{{ url_for('static', filename='logo_gesobank.png') }}" alt="gesonel" style="height:10vh;width:25vh;">
+    </header>
+    <div class="user-info">
+        <span class="username">Nome de Usuário</span>
+        <span class="saldo">Saldo: R$1000,00</span>
+    </div>
+    <nav>
+        <a href="{{ url_for('cartoes') }}" class="action-link"><button class="action-button">Ver Cartões</button></a>
+        <a href="{{ url_for('transferencia') }}" class="action-link"><button class="action-button">Transferência</button></a>
+    </nav>
+    <main>
+        <a href="{{ url_for('emprestimo') }}" class="loan-link"><button class="loan-button">Empréstimo</button></a>
+        <div class="account-activities">
+            <a href="{{ url_for('historico') }}" class="activity-link"><button class="activity-button">Atividades da Conta</button></a>
+        </div>
+    </main>
+</body>
+
+</html>

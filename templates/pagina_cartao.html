@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pagina_cartao.css') }}">
+    <script src="https://kit.fontawesome.com/d39b623768.js" crossorigin="anonymous"></script>
+    <title>Página do Cartão</title>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+        <img src="{{ url_for('static', filename='logo_gesobank.png') }}" alt="gesonel" style="height:10vh;width:25vh;">
+    </header>
+    <main>
+        <div class="cartao-info">
+            <h1>{{ nome_cartao }}</h1>
+            <p>Número do Cartão: 1234 5678 9012 3456</p>
+            <p>Data de Validade: 12/24</p>
+            <p>CVV: 123</p>
+        </div>
+        <form action="/excluir_cartao/{{ nome_cartao }}" method="POST">
+            <button type="submit" class="excluir-cartao-button">Excluir Cartão</button>
+        </form>
+    </main>
+</body>
+
+</html>

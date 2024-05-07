@@ -1,13 +1,13 @@
-from flask import Flask, request, jsonify, render_template,redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from hash import hash_usersenha, hash_sla
 import requests
 
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/login',methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         features = request.json
         senha = str(features['senha'])
         nome = str(features['nome'])
@@ -20,10 +20,9 @@ def login():
         return jsonify(response)
     return render_template('login.html')
 
-
 @app.route('/cadastro', methods=['POST', 'GET'])
 def cadastro():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         features = request.json
         senha = str(features['senha'])
         nome = str(features['nome'])
@@ -33,7 +32,7 @@ def cadastro():
         userHash = hash_sla(nome)
         passwordHash = hash_sla(senha)
         url = 'http://localhost:5000/user/register'  # Substitua localhost:5000 pela URL correta do seu back-end
-        dados = {"userHash": userHash, "passwordHash":passwordHash,"name": name,"cpf": cpf,"phone":phone}
+        dados = {"userHash": userHash, "passwordHash": passwordHash, "name": name, "cpf": cpf, "phone": phone}
         response = requests.post(url, json=dados)
         print(response.json())  # Exibindo a resposta do b
         return jsonify(response)
@@ -41,7 +40,7 @@ def cadastro():
 
 @app.route('/emprestimo', methods=['POST', 'GET'])
 def emprestimo():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         features = request.json
         senha = str(features['senha'])
         nome = str(features['nome'])
@@ -49,7 +48,7 @@ def emprestimo():
         userHash = hash_sla(nome)
         passwordHash = hash_sla(senha)
         url = 'http://localhost:5000/user/register'  # Substitua localhost:5000 pela URL correta do seu back-end
-        dados = {"userHash": userHash, "passwordHash":passwordHash,"value": value}
+        dados = {"userHash": userHash, "passwordHash": passwordHash, "value": value}
         response = requests.post(url, json=dados)
         print(response.json())  # Exibindo a resposta do b
         return jsonify(response)
@@ -68,16 +67,15 @@ def transferencia():
         userHash = hash_sla(nome)
         passwordHash = hash_sla(senha)
         url = 'http://localhost:5000/transference'  # Substitua localhost:5000 pela URL correta do seu back-end
-        dados = {"userHash": userHash, "passwordHash":passwordHash,"value": value,"receiverName": receiverName,"receiverCpf": receiverCpf,"receiverPhone": receiverPhone}
+        dados = {"userHash": userHash, "passwordHash": passwordHash, "value": value, "receiverName": receiverName, "receiverCpf": receiverCpf, "receiverPhone": receiverPhone}
         response = requests.post(url, json=dados)
         print(response.json())  # Exibindo a resposta do b
         return render_template('transferencia.html')
     else:
         return render_template('transferencia.html')
 
-
 class Atividade:
-    def __init__(self, tipo, data, valor, de=None, para=None, nome_cartao=None, numero_cartao=None,valor_emprestado=None):
+    def __init__(self, tipo, data, valor, de=None, para=None, nome_cartao=None, numero_cartao=None, valor_emprestado=None):
         self.tipo = tipo
         self.data = data
         self.valor = valor
@@ -98,6 +96,18 @@ historico_conta = [
 @app.route('/historico')
 def historico():
     return render_template('historico.html', historico=historico_conta)
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/cartoes')
+def cartoes():
+    return render_template('cartoes.html')
+
+@app.route('/pagina_cartao/<nome_cartao>', methods=['GET'])
+def pagina_cartao(nome_cartao):
+    return render_template('pagina_cartao.html', nome_cartao=nome_cartao)
 
 
 if __name__ == "__main__":
