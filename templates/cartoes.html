@@ -17,7 +17,8 @@
     </header>
     <div class="user-info">
         <span class="username">Nome de Usuário</span>
-        <span class="saldo">Saldo: R$1000,00</span>
+        <span class="saldo saldo-blurred">R$1000,00</span>
+        <i id="unblur-icon" class="fas fa-eye-slash unblur-icon" onclick="toggleBlur()"></i>
     </div>
     <main>
         <div class="cartoes-container">
@@ -32,6 +33,23 @@
             <!-- Outros cartões aqui -->
         </div>
     </main>
+
+    <script>
+        function toggleBlur() {
+            var saldoElement = document.querySelector('.saldo');
+            var iconElement = document.getElementById('unblur-icon');
+
+            if (saldoElement.classList.contains('saldo-blurred')) {
+                saldoElement.classList.remove('saldo-blurred');
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                saldoElement.classList.add('saldo-blurred');
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 
 </html>

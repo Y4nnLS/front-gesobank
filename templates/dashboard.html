@@ -17,7 +17,8 @@
     </header>
     <div class="user-info">
         <span class="username">Nome de Usuário</span>
-        <span class="saldo">Saldo: R$1000,00</span>
+        <span class="saldo saldo-blurred" id="saldo">R$<span id="saldo-valor">1000,00</span></span>
+        <i id="unblur-icon" class="fas fa-eye-slash unblur-icon" onclick="toggleBlur()"></i>
     </div>
     <nav>
         <a href="{{ url_for('cartoes') }}" class="action-link"><button class="action-button">Ver Cartões</button></a>
@@ -29,6 +30,23 @@
             <a href="{{ url_for('historico') }}" class="activity-link"><button class="activity-button">Atividades da Conta</button></a>
         </div>
     </main>
+
+    <script>
+        function toggleBlur() {
+            var saldoElement = document.getElementById('saldo');
+            var iconElement = document.getElementById('unblur-icon');
+
+            if (saldoElement.classList.contains('saldo-blurred')) {
+                saldoElement.classList.remove('saldo-blurred');
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                saldoElement.classList.add('saldo-blurred');
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 
 </html>

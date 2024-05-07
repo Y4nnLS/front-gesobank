@@ -157,4 +157,19 @@ nav {
     color: var(--bg-dark);
 }
 
-/* header fim */
+.saldo-blurred {
+    filter: blur(4px);
+}
+
+.unblur-icon {
+    display: none;
+    color: var(--bg-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.unblur-icon:hover {
+    color: var(--clr);
+}
+
