@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from hash import hash_usersenha, hash_sla
 import requests
-
+from Enviroment import get_env, save_env
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
@@ -16,8 +16,16 @@ def login():
         url = 'http://localhost:5000/user/login'  # Substitua localhost:5000 pela URL correta do seu back-end
         dados = {"userHash": userHash, "passwordHash": passwordHash}
         response = requests.post(url, json=dados)
-        print(response.json())  # Exibindo a resposta do back-end
-        return jsonify(response)
+        print(response)
+        if response.status_code == 200:
+            print(response.json())  # Exibindo a resposta do back-end
+            json = response.json()
+            print(json['PK'])
+            save_env('PK', json['PK'])
+            print(get_env('PK'))
+            return redirect(url_for('dashboard'))
+        else:
+            print('senha errada otário')
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['POST', 'GET'])
@@ -97,9 +105,11 @@ historico_conta = [
 def historico():
     return render_template('historico.html', historico=historico_conta)
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET'])
 def dashboard():
-    return render_template('dashboard.html')
+    if request.method == 'GET':
+        print(22222222222222222222222222222222222222)
+        return render_template('dashboard.html')
 
 @app.route('/cartoes')
 def cartoes():
@@ -111,4 +121,4 @@ def pagina_cartao(nome_cartao):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8085, host='0.0.0.0', debug=True, threaded=True)
