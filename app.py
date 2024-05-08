@@ -4,6 +4,12 @@ import requests
 from Enviroment import get_env, save_env
 app = Flask(__name__)
 
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    if request.method == 'GET':
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        return render_template('dashboard.html')
+
 @app.route('/', methods=['POST', 'GET'])
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -23,10 +29,12 @@ def login():
             print(json['PK'])
             save_env('PK', json['PK'])
             print(get_env('PK'))
-            return redirect(url_for('dashboard'))
+            return redirect('/dashboard')
         else:
             print('senha errada otário')
-    return render_template('login.html')
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
 
 @app.route('/cadastro', methods=['POST', 'GET'])
 def cadastro():
@@ -105,11 +113,7 @@ historico_conta = [
 def historico():
     return render_template('historico.html', historico=historico_conta)
 
-@app.route('/dashboard', methods=['GET'])
-def dashboard():
-    if request.method == 'GET':
-        print(22222222222222222222222222222222222222)
-        return render_template('dashboard.html')
+
 
 @app.route('/cartoes')
 def cartoes():
