@@ -51,7 +51,7 @@ def cadastro():
         dados = {"userHash": userHash, "passwordHash": passwordHash, "name": name, "cpf": cpf, "phone": phone}
         response = requests.post(url, json=dados)
         print(response.json())  # Exibindo a resposta do b
-        return jsonify(response)
+        # return jsonify(response)
     return render_template('cadastro.html')
 
 @app.route('/emprestimo', methods=['POST', 'GET'])
