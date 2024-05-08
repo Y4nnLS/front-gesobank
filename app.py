@@ -74,6 +74,22 @@ def transferencia():
     else:
         return render_template('transferencia.html')
 
+@app.route('/novo_cartao', methods=['GET', 'POST'])
+def novo_cartao():
+    if request.method == 'POST':
+        card_name = request.form['cardName']
+        card_number = request.form['number']
+        cvc = request.form['cvc']
+        validity = request.form['validity']
+        name = request.form['name']
+
+        # Aqui você pode adicionar a lógica para enviar os dados do cartão para o backend
+
+        # Redirecionando para a página de cartões após adicionar o novo cartão
+        return redirect(url_for('cartoes'))
+    else:
+        return render_template('novo_cartao.html')
+
 class Atividade:
     def __init__(self, tipo, data, valor, de=None, para=None, nome_cartao=None, numero_cartao=None, valor_emprestado=None):
         self.tipo = tipo

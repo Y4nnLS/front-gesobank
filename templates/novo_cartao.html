@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cartoes.css') }}">
+    <script src="https://kit.fontawesome.com/d39b623768.js" crossorigin="anonymous"></script>
+    <title>Novo Cartão</title>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='gesobank.webp') }}" alt="gesonel" style="height:10vh;width:10vh;">
+        <img src="{{ url_for('static', filename='logo_gesobank.png') }}" alt="gesonel" style="height:10vh;width:25vh;">
+    </header>
+
+    <main>
+        <div class="cartao-form-container">
+            <form action="{{ url_for('novo_cartao') }}" method="POST">
+                <div class="grupos-formularios">
+                    <div class="form-group" style="color: white;">
+                        <label for="cardName" class="label-nome-cartao">Nome do Cartão:</label>
+                        <input type="text" id="cardName" name="cardName" required>
+                    </div>
+                    <div class="form-group" style="color: white;">
+                        <label for="number" class="label-numero-cartao">Número do Cartão:</label>
+                        <input type="text" id="number" name="number" required>
+                    </div>
+                    <div class="form-group" style="color: white;">
+                        <label for="cvc" class="label-cvc">CVC:</label>
+                        <input type="text" id="cvc" name="cvc" required>
+                    </div>
+                    <div class="form-group" style="color: white;">
+                        <label for="validity" class="label-validade">Validade:</label>
+                        <input type="text" id="validity" name="validity" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group" style="color: white;">
+                        <label for="name" class="label-nome">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                </div>
+                <button type="submit" class="adicionar-cartao-button">Adicionar Cartão</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+
+</html>

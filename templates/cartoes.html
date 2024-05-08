@@ -22,8 +22,9 @@
     </div>
     <main>
         <div class="cartoes-container">
-            <h1>Cartões</h1>
-            <button class="adicionar-cartao-button">Adicionar Cartão</button>
+            <a href="{{ url_for('novo_cartao') }}"> <!-- Modificado para redirecionar para a página de novo cartão -->
+                <button class="adicionar-cartao-button">Adicionar Cartão</button>
+            </a>
             <a href="{{ url_for('pagina_cartao', nome_cartao='COMIDA') }}">
                 <button class="cartao-button">COMIDA</button>
             </a>
