@@ -94,11 +94,13 @@ def transferencia():
 def novo_cartao():
     if request.method == 'POST':
         card_name = request.form['cardName']
-        card_number = request.form['number']
-        cvc = request.form['cvc']
-        validity = request.form['validity']
+        card_number = request.form['number'] # rsa
+        cvc = request.form['cvc'] # rsa
+        validity = request.form['validity'] # rsa
         name = request.form['name']
-
+        url = 'http://localhost:5000/user/register'  # Substitua localhost:5000 pela URL correta do seu back-end
+        dados = {"cardName":card_name, "number":card_number, "cvc":cvc, "validity":validity, "name":name, "userHash":str}
+        response = requests.post(url, json=dados)
         # Aqui você pode adicionar a lógica para enviar os dados do cartão para o backend
 
         # Redirecionando para a página de cartões após adicionar o novo cartão
